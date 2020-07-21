@@ -105,12 +105,8 @@ end
 -- http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGET.html
 function _M:get(key)
     local short_uri = self:get_short_uri(key)
-    local myheaders = util.new_headers()
-    local authorization = self.auth:authorization_v4("GET", short_uri, myheaders, nil)
-    --ngx.log(ngx.INFO, "headers [[[", cjson.encode(myheaders), "]]]")
-
-    -- TODO: check authorization.
-    local url = "http://" .. self.host .. util.uri_encode(short_uri, false)
+    headers = headers or util.new_headers()
+    local authorization = self.auth:authorization_v4("GET", short_uri, headers, value)
     local res, err, req_debug = util.http_get(url, myheaders, self.timeout)
     if not res then
         ngx.log(ngx.ERR, "fail request to aws s3 service: [", req_debug, "] err: ", err)
