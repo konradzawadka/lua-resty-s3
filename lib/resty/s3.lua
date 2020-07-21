@@ -106,7 +106,7 @@ end
 function _M:get(key, headers)
     local short_uri = self:get_short_uri(key)
     headers = headers or util.new_headers()
-    local authorization = self.auth:authorization_v4("GET", short_uri, headers, value)
+    local authorization = self.auth:authorization_v4("GET", short_uri, headers, nil)
     local res, err, req_debug = util.http_get(url, myheaders, self.timeout)
     if not res then
         ngx.log(ngx.ERR, "fail request to aws s3 service: [", req_debug, "] err: ", err)
