@@ -103,7 +103,7 @@ function _M:head(key)
 end
 
 -- http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGET.html
-function _M:get(key)
+function _M:get(key, headers)
     local short_uri = self:get_short_uri(key)
     headers = headers or util.new_headers()
     local authorization = self.auth:authorization_v4("GET", short_uri, headers, value)
