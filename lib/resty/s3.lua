@@ -57,7 +57,7 @@ function _M:new(aws_access_key, aws_secret_key, aws_bucket, args)
         end
     end
     local add_bucket_to_uri = false
-    if not util.endswith(host, ".amazonaws.com") then
+    if host == 'localhost' then
         add_bucket_to_uri = true
     end
 
